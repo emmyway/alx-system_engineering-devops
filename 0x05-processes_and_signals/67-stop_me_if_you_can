@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # script stops 4-to_infinity_and_beyond without using kill and killall
 
-script_pid=$(pgrep 4-to_infinity_and_beyond)
+script_pid=$(pgrep 7-highlander)
 if [ -n "$script_pid" ]
 then
-	pkill "$script_pid"
+	pkill -15 "$script_pid"
 fi
