@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# this script displays the content of the current directory
+# but cut the first two digits
+
+for i in 'lsls /.'
+do
+	cut d"-" -f1 i
+done
