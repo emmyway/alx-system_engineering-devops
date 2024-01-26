@@ -1,1 +1,8 @@
 #!/usr/bin/env bash
+# script stops 7-highlander file using trap
+
+script_pid=$(pgrep 7-highlander)
+if [ -n "$script_pid" ]
+then
+	pkill -15 "$script_pid"
+fi

@@ -5,4 +5,7 @@ script_pid=$(pgrep 4-to_infinity_and_beyond)
 if [ -n "$script_pid" ]
 then
 	pkill "$script_pid"
+	echo 'Terminated'
+else
+	echo 'not found'
 fi
