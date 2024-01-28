@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# a simple script that prints till infinity
+while true
+do
+	echo "I am alive!" >> /tmp/my_process
+	sleep 2
+done
