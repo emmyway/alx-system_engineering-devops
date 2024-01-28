@@ -2,7 +2,7 @@
 
 # script that displays the time for 12 hours and 59 minutes
 
-hour_count=1
+hour_count=0
 while [ $hour_count -le 12 ];
 do
 	echo "Hour: $hour_count"
