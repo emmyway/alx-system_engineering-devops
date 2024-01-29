@@ -1,1 +1,14 @@
 #!/usr/bin/env bash
+# script write strory from etc/psswd directory
+
+passwd_file="/etc/passwd"
+
+while IFS=: read -r username _ uid gid info home shell
+do
+	echo "The User $username is part of the $gid gang," \
+		"lives in $home and rides the $shell." \
+		"USER ID's place is protected by the passcode" \
+		"$info, moreminfo about the user here: $uid INFO"
+
+done < "$passwd_file"
+
