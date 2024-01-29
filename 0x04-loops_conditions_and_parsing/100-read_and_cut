@@ -1,1 +1,10 @@
 #!/usr/bin/env bash
+# file read from etc/psswd directory
+
+passwd_file="/etc/passwd"
+
+while IFS=: read -r username _ uid _ _ home _
+do
+	echo "$username:$uid:$home"
+done < "$passwd_file"
+
