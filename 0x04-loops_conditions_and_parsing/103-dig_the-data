@@ -1,1 +1,6 @@
 #!/usr/bin/env bash
+# script that uses awk command to group visitors by IP and
+# HTTP status code, and displays this data from the greatest
+# to the lowest number of occurrences.
+
+awk '{print $1" "$9}' apache-access.log | sort | uniq -c | sort -rn
