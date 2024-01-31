@@ -6,3 +6,4 @@ This an alx student course projects geared toward sharpening our knowledge our k
 4-repetition_token_3.rb - regex add optionally a t or more in hbtn, taking argument from the command line
 5-beginning_and_end.rb - the script's regular expression must be exactly matching a string that starts with h ends with n and can have any single character in between taking argument from the command line
 100-textme.rb - script  output: [SENDER],[RECEIVER],[FLAGS] stat info from a VoIP log file
+7-OMG_WHY_ARE_YOU_SHOUTING.rb - regex prints extracts only capital letter from string
