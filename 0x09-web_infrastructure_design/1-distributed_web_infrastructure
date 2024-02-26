@@ -1,0 +1,38 @@
+PURPOSE OF ADDING THESE:
+#2 servers - for redundancy amd incase of fallback
+#1 Web Server (Nginx): To serve static content efficiently and handle web traffic.
+#1 Application Server: To execute the application logic and process dynamic content.
+#1 Load-Balancer (HAProxy): To distribute incoming traffic across multiple servers and improve scalability and reliability.
+#1 Set of Application Files (Code Base): To store the application code and ensure consistency across servers.
+#1 Database (MySQL): To store and manage application data.
+
+
+What distribution algorithm your load balancer is configured with and how it works?
+
+  I choose to apply the "weighted Round Robbin" which distributes load according to capacity each server can bear.
+
+
+Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both:
+
+  It enables the Active-Active setup.
+  In an Active-Active setup, both load balancers are actively distributing traffic simultaneously. In an Active-Passive setup, one load balancer is active while the other remains passive, ready to take over in case the active one fails. Active-Active setups offer better scalability and resource utilization, while Active-Passive setups provide better fault tolerance and reliability.
+
+
+How a database Primary-Replica (Master-Slave) cluster works
+
+  In a Primary-Replica cluster, the primary (master) node handles all write operations and replicates the data changes to one or more replica (slave) nodes. Replica nodes serve read requests and maintain a copy of the data synchronized with the primary node. This setup improves both performance and fault tolerance.
+
+
+Difference Between Primary and Replica Nodes:
+
+  The primary node handles write operations and is responsible for ensuring data consistency and integrity. The replica nodes serve read requests and provide scalability by distributing the read load. In terms of the application, the primary node is critical for handling write operations and ensuring data consistency, while replica nodes help in scaling read operations and improving overall performance.
+
+
+Issues with this Infrastructure:
+
+#Single Points of Failure (SPOFs):
+  The load balancer, web server, application server, and database can all be potential single points of failure if not configured redundantly.
+Security Issues:
+#Lack of a firewall and HTTPS can expose the infrastructure to various security threats, including unauthorized access, data breaches, and network attacks.
+#No Monitoring:
+  Without proper monitoring tools and practices in place, it's difficult to detect and address performance issues, security breaches, or infrastructure failures in a timely manner, leading to potential downtime and degraded user experience
