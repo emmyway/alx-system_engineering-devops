@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# script configure ubuntu machine
+# install Nginx amd serve  a page that
+# returns 'Hello World!'
+
+# update and install nginx
+sudo apt-get update -y -qq && \
+	sudo apt-get install nginx -y
+
+# starting nginx
+sudo service nginx start
+
+# let firewall allow nginx
+sudo ufw allow 'Nginx HTTP'
+
+# add content to starting page of our server
+echo 'Hello World!' | sudo tee /var/www/html/index.html
+
+# check nginx stability
+sudo nginx -t
+
+# reloading nginx
+sudo service nginx restart
