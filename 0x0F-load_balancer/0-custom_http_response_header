@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# script configure ubuntu machine
+# install Nginx amd serves a reirection
+
+# update and install nginx
+sudo apt-get update -y
+sudo apt-get install nginx -y
+
+# starting nginx
+sudo service nginx start
+
+# let firewall allow nginx
+sudo ufw allow 'Nginx HTTP'
+
+# Creating Sample Page
+echo "Hello World!" | sudo tee /var/www/html/index.html >/dev/null
+
+# Add the following configuration to the existing server block to redirect page
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/youtube.com\/@NathanielBasseyMain permanent;"
+
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# Creating 404 error page and redirect error 404
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html >/dev/null
+
+string_for_replacement="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
+
+sudo sed -i "s/listen 80 default_server;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+
+# adding to nginx header
+sudo sed -i "/server_name _;/a\ \tadd_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+# check nginx stability
+sudo nginx -t
+
+# reloading nginx
+sudo service nginx restart
