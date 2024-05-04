@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# make update
+sudo apt-get update
+
+# install haproxy
+sudo apt-get haproxy -y
+
+# start haproxy
+sudo service haproxy start
+
+# configure haproxy to send traffic to web01 and web02
+# and didtribute request using roundrobin algorithm
+sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null <<EOF
+
+frontend web_frontend
+	bind *:80
+	default backend web_backend
+
+backend web_backend
+	balance roundrobin
+	server 329726-web-01 100.25.35.54:80 check
+	server 329726-web-02 100.26.220.173:80 check
+EOF
+
+# enable haproxy to start on boot
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# check haproxy synyac and location
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# restart haproxy
+sudo service haproxy restart
