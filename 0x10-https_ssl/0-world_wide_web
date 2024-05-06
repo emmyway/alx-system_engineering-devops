@@ -1,0 +1,34 @@
+#!/bin/env bash
+
+# Function to perform DNS lookup and output result
+check_dns() {
+    local domain="$1"
+    local subdomain="$2"
+    local record_type="A"
+
+    # Check if subdomain is provided
+    if [ -n "$subdomain" ]; then
+        subdomain_list=("$subdomain")
+    else
+        subdomain_list=("www" "lb-01" "web-01" "web-02")
+    fi
+
+    # Perform DNS lookup for each subdomain
+    for sub in "${subdomain_list[@]}"; do
+        destination=$(dig +short "$sub"."$domain" "$record_type")
+        echo "The subdomain $sub.$domain is a $record_type record and points to $destination"
+    done
+}
+
+# Check if arguments are provided
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 domain [subdomain]"
+    exit 1
+fi
+
+# Parse arguments
+domain="$1"
+subdomain="$2"
+
+# Call function to check DNS
+check_dns "$domain" "$subdomain" | awk 'NR%2{printf "%s ", $0; next} 1; '\n''
