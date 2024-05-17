@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 # debug to make nginx listen on port 80
-# create site enabled symbolic link
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-#restart nginx
 sudo service nginx restart
-#terminate the first nginx process id
 kill "$(pgrep 'nginx' | head -1)"
