@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# debug to make nginx listen on port 80
+# remove the site-enabled file
+rm /etc/nginx/sites-enabled/default
+# create site enabled symbolic link
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+#restart nginx
+sudo service nginx restart
