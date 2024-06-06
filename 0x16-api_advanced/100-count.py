@@ -28,7 +28,7 @@ def count_words(subreddit, word_list, hot_list=[], after=None, count={}):
 
     try:
         # make request
-        response = requests.get(url, headers=headers, params=params, allow_redirection=False)
+        response = requests.get(url, headers=headers, params=params, allow_redirects=False)
         # check subreddit validity
         if response.status_code != 200:
             return
