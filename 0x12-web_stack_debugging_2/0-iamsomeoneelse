@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# script runs the whoami command as a different user
+
+# validate user
+if [ "$#" -ne 1 ]
+then
+	echo "Usage: $0  <username>"
+	exit 1
+fi
+
+# capture username from argument
+username=$1
+
+# run whoami as a specified user
+sudo -u "$username" whoami
